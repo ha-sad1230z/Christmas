@@ -1,298 +1,270 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>🎄 Merry Christmas 🎄</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎄 Merry Christmas 🎄</title>
 
-        body {
-            height: 100vh;
-            overflow: hidden;
-            background:
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    background:
         radial-gradient(circle at top, #1a2a3a, #02040a 60%),
         linear-gradient(to bottom, #0a1020, #000);
-            font-family: 'Segoe UI', sans-serif;
-        }
+    font-family:'Segoe UI',sans-serif;
+}
 
-        /* Canvas tuyết */
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }
-        /* ===== STAR ===== */
-        .star {
-            position: absolute;
-            top: 8%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            animation: starGlow 2s infinite alternate;
-        }
+/* ===== TUYẾT ===== */
+canvas{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+}
 
-        @keyframes starGlow {
-            from { filter: drop-shadow(0 0 10px gold); }
-            to   { filter: drop-shadow(0 0 30px gold); }
-        }
+/* ===== NHẠC ===== */
+.music-btn{
+    position:fixed;
+    top:20px;
+    right:20px;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:rgba(255,255,255,.15);
+    border:2px solid #fff;
+    color:#fff;
+    font-size:22px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:20;
+}
 
-        /* ===== BELL ===== */
-        .bell {
-            position: absolute;
-            width: 55px;
-            animation: swing 2.5s ease-in-out infinite;
-            transform-origin: top center;
-        }
+/* ===== TREE WRAPPER ===== */
+.tree-wrapper{
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(80vw,700px);
+    aspect-ratio:2/3;
+    z-index:5;
+}
 
-        @keyframes swing {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(10deg); }
-            50% { transform: rotate(0deg); }
-            75% { transform: rotate(-10deg); }
-            100% { transform: rotate(0deg); }
-        }
+.tree-wrapper img{
+    position:absolute;
+}
 
-        /* ===== ORNAMENT ===== */
-        .ornament {
-            position: absolute;
-            width: 40px;
-            animation: ornamentGlow 1.8s infinite alternate;
-        }
+/* ===== TREE ===== */
+.tree{
+    width:100%;
+    bottom:0;
+    left:0;
+}
 
-        @keyframes ornamentGlow {
-            from { filter: brightness(0.8); }
-            to   { filter: brightness(1.3); }
-        }
-        /* Cây thông */
-        .tree {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 700px;
-        }
+/* ===== STAR ===== */
+.star{
+    width:18%;
+    top:-6%;
+    left:50%;
+    transform:translateX(-50%);
+    animation:glow 2s infinite alternate;
+}
 
-        /* Đèn */
-        .light {
-            position: absolute;
-            width: 300px;
-            animation: blink 1.2s infinite alternate;
-        }
+@keyframes glow{
+    from{filter:drop-shadow(0 0 10px gold);}
+    to{filter:drop-shadow(0 0 30px gold);}
+}
 
-        @keyframes blink {
-            0% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
+/* ===== LIGHT ===== */
+.light{
+    animation:blink 1.2s infinite alternate;
+}
+@keyframes blink{
+    from{opacity:.3;}
+    to{opacity:1;}
+}
 
-        /* Quà */
-        .gift {
-            position: absolute;
-            width: 100px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
+.l1{top:22%;left:30%;width:40%}
+.l2{top:36%;left:28%;width:44%}
+.l3{top:50%;left:26%;width:48%}
+.l4{top:64%;left:24%;width:52%}
 
-        .gift:hover {
-            transform: scale(1.2) rotate(-5deg);
-        }
+/* ===== BELL ===== */
+.bell{
+    width:8%;
+    transform-origin:top center;
+    animation:swing 2.5s ease-in-out infinite;
+}
+@keyframes swing{
+    0%{transform:rotate(0)}
+    25%{transform:rotate(10deg)}
+    50%{transform:rotate(0)}
+    75%{transform:rotate(-10deg)}
+    100%{transform:rotate(0)}
+}
 
-        /* Hộp lời chúc */
-        .message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.8);
-            color: #fff;
-            padding: 25px 40px;
-            border-radius: 12px;
-            font-size: 20px;
-            display: none;
-            text-align: center;
-            z-index: 10;
-        }
+.b1{top:28%;left:45%}
+.b2{top:42%;left:35%}
+.b3{top:56%;left:55%}
+.b4{top:70%;left:30%}
 
-        .message button {
-            margin-top: 15px;
-            padding: 8px 20px;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            background: #ff4d4d;
-            color: white;
-            font-size: 16px;
-        }
+/* ===== GIFT ===== */
+.gift{
+    width:14%;
+    bottom:0;
+    cursor:pointer;
+    transition:.3s;
+}
+.gift:hover{transform:scale(1.2) rotate(-5deg)}
 
-        .music-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.15);
-            border: 2px solid #fff;
-            color: white;
-            font-size: 22px;
-            cursor: pointer;
-            backdrop-filter: blur(6px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 20;
-            transition: transform .3s, background .3s;
-        }
+.g1{left:45%}
+.g2{left:25%}
+.g3{left:65%}
 
-        .music-btn:hover {
-            transform: scale(1.1);
-            background: rgba(255,255,255,0.3);
-        }
+/* ===== MESSAGE ===== */
+.message{
+    position:fixed;
+    inset:0;
+    display:none;
+    background:rgba(0,0,0,.7);
+    z-index:30;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
 
-        .music-btn.playing {
-            animation: pulse 1.5s infinite;
-        }
+.message-box{
+    background:#000;
+    color:#fff;
+    padding:25px 40px;
+    border-radius:15px;
+    text-align:center;
+    font-size:20px;
+}
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255,255,255,.6); }
-            100% { box-shadow: 0 0 0 15px rgba(255,255,255,0); }
-        }
-    </style>
+.message-box button{
+    margin-top:15px;
+    padding:8px 20px;
+    border:none;
+    border-radius:20px;
+    background:#ff4d4d;
+    color:white;
+    cursor:pointer;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:600px){
+    .tree-wrapper{width:95vw}
+    .gift{width:18%}
+    .bell{width:10%}
+}
+</style>
 </head>
+
 <body>
 
 <canvas id="snow"></canvas>
+
 <audio id="bgMusic" loop>
     <source src="christmas.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Nút bật/tắt nhạc -->
-<div class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</div>
-<!--Ngôi Sao-->
-<img src="star.png" class="star">
-<!-- Cây thông -->
-<img src="tree.png" class="tree" id="tree">
+<div class="music-btn" onclick="toggleMusic()">🎵</div>
 
-<!-- Đèn -->
-<img src="light.png" class="light" style="top:25%; left:42%;">
-<img src="light.png" class="light" style="top:40%; left:42%; animation-delay:.3s">
-<img src="light.png" class="light" style="top:52%; left:42%; animation-delay:.6s">
-<img src="light.png" class="light" style="top:70%; left:42%; animation-delay:.9s">
-<!-- Chuông -->
-<img src="bell.png" class="bell" style="top:28%; left:48%;">
-<img src="bell.png" class="bell" style="top:45%; left:44%; animation-delay:.3s">
-<img src="bell.png" class="bell" style="top:58%; left:52%; animation-delay:.6s">
-<img src="bell.png" class="bell" style="top:75%; left:42%; animation-delay:.9s">
-<!-- Quà -->
-<img src="gift.png" class="gift" style="top:90%; left:50%;" onclick="showMessage()">
-<img src="gift.png" class="gift" style="top:56%; left:42%;" onclick="showMessage()">
-<img src="gift.png" class="gift" style="top:72%; left:52%;" onclick="showMessage()">
-<img src="gift.png" class="gift" style="top:90%; left:22%;" onclick="showMessage()">
-<img src="gift.png" class="gift" style="top:90%; left:82%;" onclick="showMessage()">
-<img src="gift.png" class="gift" style="top:44%; left:50%;" onclick="showMessage()">
+<!-- TREE -->
+<div class="tree-wrapper">
 
-<!-- Lời chúc -->
-<div class="message" id="message">
-    🎄 Chúc bạn một mùa Giáng Sinh an lành  
-    <br>✨ Tràn đầy niềm vui & hạnh phúc ✨
-    <br>
-    <button onclick="closeMessage()">Đóng</button>
+    <img src="star.png" class="star">
+
+    <img src="tree.png" class="tree">
+
+    <!-- LIGHT -->
+    <img src="light.png" class="light l1">
+    <img src="light.png" class="light l2">
+    <img src="light.png" class="light l3">
+    <img src="light.png" class="light l4">
+
+    <!-- BELL -->
+    <img src="bell.png" class="bell b1">
+    <img src="bell.png" class="bell b2">
+    <img src="bell.png" class="bell b3">
+    <img src="bell.png" class="bell b4">
+
+    <!-- GIFT -->
+    <img src="gift.png" class="gift g1" onclick="showMsg()">
+    <img src="gift.png" class="gift g2" onclick="showMsg()">
+    <img src="gift.png" class="gift g3" onclick="showMsg()">
+</div>
+
+<!-- MESSAGE -->
+<div class="message" id="msg">
+    <div class="message-box">
+        🎄 Chúc bạn Giáng Sinh an lành  
+        <br>✨ Hạnh phúc & ấm áp ✨
+        <br>
+        <button onclick="closeMsg()">Đóng</button>
+    </div>
 </div>
 
 <script>
-/* ================== TUYẾT RƠI ================== */
-const canvas = document.getElementById("snow");
-const ctx = canvas.getContext("2d");
+/* ===== SNOW ===== */
+const canvas=document.getElementById("snow");
+const ctx=canvas.getContext("2d");
+function resize(){
+    canvas.width=innerWidth;
+    canvas.height=innerHeight;
+}
+resize();
+window.onresize=resize;
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let snowflakes = [];
-
-for (let i = 0; i < 150; i++) {
-    snowflakes.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 3 + 1,
-        d: Math.random() + 1
+let snow=[];
+for(let i=0;i<150;i++){
+    snow.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*3+1,
+        d:Math.random()+1
     });
 }
 
-function drawSnow() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "white";
+function drawSnow(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="white";
     ctx.beginPath();
-    snowflakes.forEach(f => {
-        ctx.moveTo(f.x, f.y);
-        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+    snow.forEach(f=>{
+        ctx.moveTo(f.x,f.y);
+        ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
+        f.y+=f.d;
+        if(f.y>canvas.height){f.y=0;f.x=Math.random()*canvas.width;}
     });
     ctx.fill();
-    moveSnow();
+}
+setInterval(drawSnow,30);
+
+/* ===== MUSIC ===== */
+const music=document.getElementById("bgMusic");
+let playing=false;
+function toggleMusic(){
+    playing?music.pause():music.play();
+    playing=!playing;
 }
 
-function moveSnow() {
-    snowflakes.forEach(f => {
-        f.y += f.d;
-        if (f.y > canvas.height) {
-            f.y = 0;
-            f.x = Math.random() * canvas.width;
-        }
-    });
+/* ===== MESSAGE ===== */
+function showMsg(){
+    document.getElementById("msg").style.display="flex";
 }
-/* ================== MUSIC ================== */
-const music = document.getElementById("bgMusic");
-const musicBtn = document.getElementById("musicBtn");
-let isPlaying = false;
-
-function toggleMusic() {
-    if (!isPlaying) {
-        music.play();
-        musicBtn.classList.add("playing");
-        musicBtn.innerHTML = "🔊";
-    } else {
-        music.pause();
-        musicBtn.classList.remove("playing");
-        musicBtn.innerHTML = "🔇";
-    }
-    isPlaying = !isPlaying;
+function closeMsg(){
+    document.getElementById("msg").style.display="none";
 }
-
-/* Auto play sau khi người dùng click lần đầu (fix chặn trình duyệt) */
-document.body.addEventListener("click", () => {
-    if (!isPlaying) {
-        music.play().then(() => {
-            isPlaying = true;
-            musicBtn.classList.add("playing");
-            musicBtn.innerHTML = "🔊";
-        }).catch(()=>{});
-    }
-}, { once: true });
-document.querySelectorAll(".bell").forEach(bell => {
-    bell.onclick = () => {
-        bell.style.animation = "swing .3s infinite";
-        setTimeout(() => bell.style.animation = "swing 2.5s ease-in-out infinite", 800);
-    }
-});
-
-setInterval(drawSnow, 30);
-
-/* ================== QUÀ & LỜI CHÚC ================== */
-function showMessage() {
-    document.getElementById("message").style.display = "block";
-}
-
-function closeMessage() {
-    document.getElementById("message").style.display = "none";
-}
-
-window.onresize = () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-};
 </script>
 
 </body>
