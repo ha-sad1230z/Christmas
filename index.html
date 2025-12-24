@@ -1,193 +1,192 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>🎄 Merry Christmas 🎄</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎄 Merry Christmas 🎄</title>
 
-        body {
-            height: 100vh;
-            overflow: hidden;
-            background:
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    background:
         radial-gradient(circle at top, #1a2a3a, #02040a 60%),
         linear-gradient(to bottom, #0a1020, #000);
-            font-family: 'Segoe UI', sans-serif;
-        }
+    font-family:'Segoe UI', sans-serif;
+}
 
-        /* Canvas tuyết */
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }
-        /* ===== STAR ===== */
-        .star {
-            position: absolute;
-            top: 8%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            animation: starGlow 2s infinite alternate;
-        }
+/* ================= CANVAS ================= */
+canvas{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+}
 
-        @keyframes starGlow {
-            from { filter: drop-shadow(0 0 10px gold); }
-            to   { filter: drop-shadow(0 0 30px gold); }
-        }
+/* ================= STAR ================= */
+.star{
+    position:absolute;
+    top:6vh;
+    left:50%;
+    transform:translateX(-50%);
+    width:clamp(60px,15vw,120px);
+    animation:starGlow 2s infinite alternate;
+}
 
-        /* ===== BELL ===== */
-        .bell {
-            position: absolute;
-            width: 55px;
-            animation: swing 2.5s ease-in-out infinite;
-            transform-origin: top center;
-        }
+@keyframes starGlow{
+    from{filter:drop-shadow(0 0 10px gold);}
+    to{filter:drop-shadow(0 0 30px gold);}
+}
 
-        @keyframes swing {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(10deg); }
-            50% { transform: rotate(0deg); }
-            75% { transform: rotate(-10deg); }
-            100% { transform: rotate(0deg); }
-        }
+/* ================= TREE ================= */
+.tree{
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:clamp(260px,70vw,700px);
+}
 
-        /* ===== ORNAMENT ===== */
-        .ornament {
-            position: absolute;
-            width: 40px;
-            animation: ornamentGlow 1.8s infinite alternate;
-        }
+/* ================= LIGHT ================= */
+.light{
+    position:absolute;
+    width:clamp(120px,30vw,300px);
+    animation:blink 1.2s infinite alternate;
+}
 
-        @keyframes ornamentGlow {
-            from { filter: brightness(0.8); }
-            to   { filter: brightness(1.3); }
-        }
-        /* Cây thông */
-        .tree {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 700px;
-        }
+@keyframes blink{
+    0%{opacity:.3;}
+    100%{opacity:1;}
+}
 
-        /* Đèn */
-        .light {
-            position: absolute;
-            width: 300px;
-            animation: blink 1.2s infinite alternate;
-        }
+/* ================= BELL ================= */
+.bell{
+    position:absolute;
+    width:clamp(30px,6vw,55px);
+    animation:swing 2.5s ease-in-out infinite;
+    transform-origin:top center;
+}
 
-        @keyframes blink {
-            0% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
+@keyframes swing{
+    0%{transform:rotate(0);}
+    25%{transform:rotate(10deg);}
+    50%{transform:rotate(0);}
+    75%{transform:rotate(-10deg);}
+    100%{transform:rotate(0);}
+}
 
-        /* Quà */
-        .gift {
-            position: absolute;
-            width: 100px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
+/* ================= GIFT ================= */
+.gift{
+    position:absolute;
+    width:clamp(50px,12vw,100px);
+    cursor:pointer;
+    transition:transform .3s;
+}
 
-        .gift:hover {
-            transform: scale(1.2) rotate(-5deg);
-        }
+.gift:hover{
+    transform:scale(1.2) rotate(-5deg);
+}
 
-        /* Hộp lời chúc */
-        .message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.8);
-            color: #fff;
-            padding: 25px 40px;
-            border-radius: 12px;
-            font-size: 20px;
-            display: none;
-            text-align: center;
-            z-index: 10;
-        }
+/* ================= MESSAGE ================= */
+.message{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:min(90vw,480px);
+    background:rgba(0,0,0,.85);
+    color:#fff;
+    padding:25px;
+    border-radius:14px;
+    font-size:clamp(16px,4vw,20px);
+    display:none;
+    text-align:center;
+    z-index:10;
+}
 
-        .message button {
-            margin-top: 15px;
-            padding: 8px 20px;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            background: #ff4d4d;
-            color: white;
-            font-size: 16px;
-        }
+.message button{
+    margin-top:15px;
+    padding:10px 24px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    background:#ff4d4d;
+    color:#fff;
+    font-size:16px;
+}
 
-        .music-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.15);
-            border: 2px solid #fff;
-            color: white;
-            font-size: 22px;
-            cursor: pointer;
-            backdrop-filter: blur(6px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 20;
-            transition: transform .3s, background .3s;
-        }
+/* ================= MUSIC BUTTON ================= */
+.music-btn{
+    position:fixed;
+    top:15px;
+    right:15px;
+    width:clamp(45px,10vw,55px);
+    height:clamp(45px,10vw,55px);
+    border-radius:50%;
+    background:rgba(255,255,255,.15);
+    border:2px solid #fff;
+    color:#fff;
+    font-size:22px;
+    cursor:pointer;
+    backdrop-filter:blur(6px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:20;
+    transition:transform .3s;
+}
 
-        .music-btn:hover {
-            transform: scale(1.1);
-            background: rgba(255,255,255,0.3);
-        }
+.music-btn:hover{
+    transform:scale(1.1);
+}
 
-        .music-btn.playing {
-            animation: pulse 1.5s infinite;
-        }
+.music-btn.playing{
+    animation:pulse 1.5s infinite;
+}
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255,255,255,.6); }
-            100% { box-shadow: 0 0 0 15px rgba(255,255,255,0); }
-        }
-    </style>
+@keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(255,255,255,.6);}
+    100%{box-shadow:0 0 0 15px rgba(255,255,255,0);}
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:600px){
+    .light{display:none;}
+}
+</style>
 </head>
+
 <body>
 
 <canvas id="snow"></canvas>
+
 <audio id="bgMusic" loop>
     <source src="christmas.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Nút bật/tắt nhạc -->
 <div class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</div>
-<!--Ngôi Sao-->
-<img src="star.png" class="star">
-<!-- Cây thông -->
-<img src="tree.png" class="tree" id="tree">
 
-<!-- Đèn -->
+<img src="star.png" class="star">
+<img src="tree.png" class="tree">
+
+<!-- LIGHT -->
 <img src="light.png" class="light" style="top:25%; left:42%;">
 <img src="light.png" class="light" style="top:40%; left:42%; animation-delay:.3s">
 <img src="light.png" class="light" style="top:52%; left:42%; animation-delay:.6s">
 <img src="light.png" class="light" style="top:70%; left:42%; animation-delay:.9s">
-<!-- Chuông -->
+
+<!-- BELL -->
 <img src="bell.png" class="bell" style="top:28%; left:48%;">
 <img src="bell.png" class="bell" style="top:45%; left:44%; animation-delay:.3s">
 <img src="bell.png" class="bell" style="top:58%; left:52%; animation-delay:.6s">
 <img src="bell.png" class="bell" style="top:75%; left:42%; animation-delay:.9s">
-<!-- Quà -->
+
+<!-- GIFT -->
 <img src="gift.png" class="gift" style="top:90%; left:50%;" onclick="showMessage()">
 <img src="gift.png" class="gift" style="top:56%; left:42%;" onclick="showMessage()">
 <img src="gift.png" class="gift" style="top:72%; left:52%;" onclick="showMessage()">
@@ -195,104 +194,111 @@
 <img src="gift.png" class="gift" style="top:90%; left:82%;" onclick="showMessage()">
 <img src="gift.png" class="gift" style="top:44%; left:50%;" onclick="showMessage()">
 
-<!-- Lời chúc -->
-<div class="message" id="message">
-    🎄 Chúc bạn một mùa Giáng Sinh an lành  
-    <br>✨ Tràn đầy niềm vui & hạnh phúc ✨
-    <br>
-    <button onclick="closeMessage()">Đóng</button>
+<!-- MESSAGE -->
+<div class="message" id="message">  
+<button onclick="closeMessage()">Đóng</button>
 </div>
 
 <script>
-/* ================== TUYẾT RƠI ================== */
+/* ============== SNOW ============== */
 const canvas = document.getElementById("snow");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
 
-let snowflakes = [];
+const snowImg = new Image();
+snowImg.src = "snow.png";
 
-for (let i = 0; i < 150; i++) {
-    snowflakes.push({
+let snow = [];
+
+for(let i=0;i<120;i++){
+    snow.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        r: Math.random() * 3 + 1,
-        d: Math.random() + 1
+        size: Math.random() * 10 + 8,
+        speed: Math.random() * 2 + 2
     });
 }
 
-function drawSnow() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "white";
-    ctx.beginPath();
-    snowflakes.forEach(f => {
-        ctx.moveTo(f.x, f.y);
-        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-    });
-    ctx.fill();
-    moveSnow();
-}
+function drawSnow(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 
-function moveSnow() {
-    snowflakes.forEach(f => {
-        f.y += f.d;
-        if (f.y > canvas.height) {
-            f.y = 0;
-            f.x = Math.random() * canvas.width;
+    snow.forEach(s=>{
+        ctx.drawImage(snowImg, s.x, s.y, s.size, s.size);
+        s.y += s.speed;
+
+        if(s.y > canvas.height){
+            s.y = -s.size;
+            s.x = Math.random() * canvas.width;
         }
     });
 }
-/* ================== MUSIC ================== */
-const music = document.getElementById("bgMusic");
-const musicBtn = document.getElementById("musicBtn");
-let isPlaying = false;
 
-function toggleMusic() {
-    if (!isPlaying) {
+setInterval(drawSnow, 16);
+
+/* ============== MUSIC ============== */
+const music=document.getElementById("bgMusic");
+const musicBtn=document.getElementById("musicBtn");
+let isPlaying=false;
+
+function toggleMusic(){
+    if(!isPlaying){
         music.play();
         musicBtn.classList.add("playing");
-        musicBtn.innerHTML = "🔊";
-    } else {
+        musicBtn.innerHTML="🔊";
+    }else{
         music.pause();
         musicBtn.classList.remove("playing");
-        musicBtn.innerHTML = "🔇";
+        musicBtn.innerHTML="🔇";
     }
-    isPlaying = !isPlaying;
+    isPlaying=!isPlaying;
 }
 
-/* Auto play sau khi người dùng click lần đầu (fix chặn trình duyệt) */
-document.body.addEventListener("click", () => {
-    if (!isPlaying) {
-        music.play().then(() => {
-            isPlaying = true;
+document.body.addEventListener("click",()=>{
+    if(!isPlaying){
+        music.play().then(()=>{
+            isPlaying=true;
             musicBtn.classList.add("playing");
-            musicBtn.innerHTML = "🔊";
+            musicBtn.innerHTML="🔊";
         }).catch(()=>{});
     }
-}, { once: true });
-document.querySelectorAll(".bell").forEach(bell => {
-    bell.onclick = () => {
-        bell.style.animation = "swing .3s infinite";
-        setTimeout(() => bell.style.animation = "swing 2.5s ease-in-out infinite", 800);
-    }
+},{once:true});
+
+/* ============== BELL CLICK ============== */
+document.querySelectorAll(".bell").forEach(b=>{
+    b.onclick=()=>{
+        b.style.animation="swing .3s infinite";
+        setTimeout(()=>b.style.animation="swing 2.5s ease-in-out infinite",800);
+    };
 });
+const wishes = [
+    "🎄 Chúc bạn một mùa Giáng Sinh an lành<br>✨ Tràn đầy niềm vui & hạnh phúc ✨",
+    "🎁 Merry Christmas!<br>❄️ Mong mọi điều tốt đẹp sẽ đến với bạn ❄️",
+    "🎅 Giáng Sinh ấm áp<br>❤️ Bên gia đình & những người thân yêu ❤️",
+    "🌟 Chúc bạn Noel vui vẻ<br>🎶 Bình an – Hạnh phúc – Thành công 🎶",
+    "🎄 Noel này<br>✨ Cười nhiều hơn – Buồn ít hơn – Yêu nhiều hơn ✨",
+    "🎁 Chúc bạn một Giáng Sinh<br>💖 Ngập tràn yêu thương & phép màu 💖"
+];
+/* ============== MESSAGE ============== */
+let lastIndex = -1;
+function showMessage(){
+    let index;
+    do{
+        index = Math.floor(Math.random() * wishes.length);
+    }while(index === lastIndex);
+    lastIndex = index;
 
-setInterval(drawSnow, 30);
-
-/* ================== QUÀ & LỜI CHÚC ================== */
-function showMessage() {
-    document.getElementById("message").style.display = "block";
+    message.innerHTML = wishes[index] + '<br><button onclick="closeMessage()">Đóng</button>';
+    message.style.display="block";
 }
-
-function closeMessage() {
-    document.getElementById("message").style.display = "none";
+function closeMessage(){
+    document.getElementById("message").style.display="none";
 }
-
-window.onresize = () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-};
 </script>
 
 </body>
